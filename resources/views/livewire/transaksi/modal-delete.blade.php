@@ -26,9 +26,11 @@
             </button>
 
             <button
+                wire:click="destroy"
                 class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-                Hapus (Dummy)
+                Hapus
             </button>
+
         </div>
 
     </div>

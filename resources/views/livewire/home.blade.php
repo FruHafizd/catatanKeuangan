@@ -77,12 +77,16 @@
                                 Edit
                             </button>
 
-                            <button
+                           <button
                                 x-data
-                                x-on:click="$dispatch('open-modal', 'modal-delete')"
+                                x-on:click.prevent="
+                                    $dispatch('confirm-delete', { id: {{ $item->id }} });
+                                    $dispatch('open-modal', 'modal-delete');
+                                "
                                 class="text-sm text-red-600 hover:underline">
                                 Delete
                             </button>
+
                         </div>
                     </div>
                 @endforeach
