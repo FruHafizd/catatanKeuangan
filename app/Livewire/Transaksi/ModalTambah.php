@@ -15,7 +15,7 @@ class ModalTambah extends Component
 
     protected $rules = [
         'date' => 'required|date',
-        'amount_money' => 'required',
+        'amount_money' => 'required|numeric|min:1',
         'type_transaction' => 'required',
         'payment_method' => 'required',
         'information' => 'required',

@@ -27,13 +27,27 @@
                 @enderror
             </div>
 
-            <div>
+            <div
+                x-data="{
+                display: '',
+                raw: ''
+                }"
+            >
                 <label class="text-sm">Jumlah Uang</label>
-                <input type="number" wire:model="amount_money" class="w-full border rounded-lg p-2">
+                    <input
+                        type="text"
+                        x-model="display"
+                        @input="
+                            raw = display.replace(/\D/g, '');
+                            display = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            $wire.amount_money = raw;
+                        "
+                        class="w-full border rounded-lg p-2"
+                        placeholder="Contoh: 1000"
+                    >
+
                 @error('amount_money')
-                        <span class="invalid-feedback">
-                                {{ $message }}
-                         </span>
+                    <span class="text-sm text-red-600">{{ $message }}</span>
                 @enderror
             </div>
 
