@@ -31,8 +31,12 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
-                        {{ __('Home') }}
+                        {{ __('Beranda') }}
                     </x-nav-link>
+
+                    {{-- <x-nav-link :href="route('home')"  wire:navigate>
+                        {{ __('Mutasi') }}
+                    </x-nav-link> --}}
                 </div>
             </div>
 
@@ -82,7 +86,7 @@ new class extends Component
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
-                {{ __('Home') }}
+                {{ __('Beranda') }}
             </x-responsive-nav-link>
         </div>
 

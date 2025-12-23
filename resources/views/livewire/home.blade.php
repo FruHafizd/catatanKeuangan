@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Home') }}
+            {{ __('Beranda') }}
         </h2>
     </x-slot>
     
@@ -69,7 +69,10 @@
                         <div class="mt-4 flex justify-end gap-3">
                             <button
                                 x-data
-                                x-on:click="$dispatch('open-modal', 'modal-edit')"
+                                x-on:click.prevent="
+                                    $dispatch('edit-transaction', { id: {{ $item->id }} });
+                                    $dispatch('open-modal', 'modal-edit');
+                                "
                                 class="text-sm text-blue-600 hover:underline">
                                 Edit
                             </button>
