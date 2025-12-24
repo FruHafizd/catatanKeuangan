@@ -13,7 +13,7 @@
                 <div>
                     <p class="text-sm text-gray-500">Total Uang</p>
                     <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($totalUang ?? 0, 0, ',', '.') }}
+                        Rp {{ number_format($totalMoney ?? 0, 0, ',', '.') }}
                     </p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div>
                     <p class="text-sm text-gray-500">Uang Masuk</p>
                     <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($uangMasuk ?? 0, 0, ',', '.') }}
+                        Rp {{ number_format($incomeMoney ?? 0, 0, ',', '.') }}
                     </p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <div>
                     <p class="text-sm text-gray-500">Uang Keluar</p>
                     <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($uangKeluar ?? 0, 0, ',', '.') }}
+                        Rp {{ number_format($expenseMoney ?? 0, 0, ',', '.') }}
                     </p>
                 </div>
             </div>
