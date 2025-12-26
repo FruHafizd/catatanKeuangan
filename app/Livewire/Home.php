@@ -6,14 +6,16 @@ use App\Models\Trasction;
 use Livewire\Component;
 
 class Home extends Component
-{
+{    
     public function render()
     {   
-        $transaction = Trasction::latest()->limit(10)->get();
+        $transaction = Trasction::latest()->limit(9)->get();
 
         return view('livewire.home',[
            "transactions" => $transaction 
         ])
-            ->layout('layouts.app');
+            ->layout('layouts.app',[
+                'title' => 'Beranda'
+            ]);
     }
 }

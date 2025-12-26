@@ -1,57 +1,75 @@
-<div class="py-12 flex justify-center">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full px-4">
-            <!-- TOTAL UANG -->
-            <div class="bg-white shadow-md rounded-xl p-6 flex items-center gap-4">
-                <div class="bg-green-100 text-green-600 p-4 rounded-full">
-                    <!-- Icon Wallet -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2m4-3h-6a2 2 0 000 4h6v-4z" />
-                    </svg>
-                </div>
+@php
+    use Carbon\Carbon;
+    Carbon::setLocale('id');
+@endphp
 
-                <div>
-                    <p class="text-sm text-gray-500">Total Uang</p>
-                    <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($totalMoney ?? 0, 0, ',', '.') }}
-                    </p>
+<div class="py-8 flex justify-center">
+       <div class="max-w-6xl w-full px-4">
+
+        <!-- HEADER -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">
+                Catatan Keuangan
+            </h1>
+            <p class="text-sm text-gray-500">
+                {{ Carbon::now()->translatedFormat('F Y') }}
+            </p>
+        </div>
+
+        <!-- GRID CARD -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- TOTAL PEMASUKAN -->
+            <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-xl p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-green-700 font-medium mb-1">Total Pemasukan</p>
+                        <p class="text-2xl font-bold text-green-800">
+                            Rp {{ number_format($incomeMoney ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
-            <!-- UANG MASUK -->
-            <div class="bg-white shadow-md rounded-xl p-6 flex items-center gap-4">
-                <div class="bg-blue-100 text-blue-600 p-4 rounded-full">
-                    <!-- Icon Arrow Down -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4v16m0 0l-6-6m6 6l6-6" />
-                    </svg>
+            <!-- TOTAL PENGELUARAN -->
+            <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-xl p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-red-700 font-medium mb-1">Total Pengeluaran</p>
+                        <p class="text-2xl font-bold text-red-800">
+                            Rp {{ number_format($expenseMoney ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 bg-red-200 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
+                        </svg>
+                    </div>
                 </div>
+            </div>
 
-                <div>
-                    <p class="text-sm text-gray-500">Uang Masuk</p>
-                    <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($incomeMoney ?? 0, 0, ',', '.') }}
-                    </p>
+            <!-- SALDO BERSIH -->
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-blue-700 font-medium mb-1">Saldo Bersih</p>
+                        <p class="text-2xl font-bold text-blue-800">
+                            Rp {{ number_format($totalMoney ?? 0, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- UANG KELUAR -->
-            <div class="bg-white shadow-md rounded-xl p-6 flex items-center gap-4">
-                <div class="bg-red-100 text-red-600 p-4 rounded-full">
-                    <!-- Icon Arrow Up -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 20V4m0 0l6 6m-6-6l-6 6" />
-                    </svg>
-                </div>
-
-                <div>
-                    <p class="text-sm text-gray-500">Uang Keluar</p>
-                    <p class="text-2xl font-bold text-gray-800">
-                        Rp {{ number_format($expenseMoney ?? 0, 0, ',', '.') }}
-                    </p>
-                </div>
-            </div>
         </div>
 </div>

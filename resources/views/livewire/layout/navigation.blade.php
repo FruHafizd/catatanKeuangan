@@ -34,9 +34,9 @@ new class extends Component
                         {{ __('Beranda') }}
                     </x-nav-link>
 
-                    {{-- <x-nav-link :href="route('home')"  wire:navigate>
-                        {{ __('Mutasi') }}
-                    </x-nav-link> --}}
+                    <x-nav-link :href="route('history')" :active="request()->routeIs('history')" wire:navigate>
+                        {{ __('Riwayat Transaksi') }}
+                    </x-nav-link>
                 </div>
             </div>
 
