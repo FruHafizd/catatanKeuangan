@@ -9,7 +9,7 @@ class Home extends Component
 {    
     public function render()
     {   
-        $transaction = Trasction::latest()->limit(10)->get();
+        $transaction = Trasction::latest()->limit(9)->get();
 
         return view('livewire.home',[
            "transactions" => $transaction 
