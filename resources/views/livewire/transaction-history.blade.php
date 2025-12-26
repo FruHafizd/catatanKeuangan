@@ -50,7 +50,7 @@
                         <div class="flex-1">
                             <p class="text-sm font-medium text-gray-600 mb-1">Selisih Saldo</p>
                             <p class="text-2xl font-bold {{ $this->balance >= 0 ? 'text-blue-600' : 'text-orange-600' }}">
-                                Rp {{ number_format(abs($this->balance), 0, ',', '.') }}
+                                Rp {{ number_format($this->balance, 0, ',', '.') }}
                             </p>
                             <p class="text-xs {{ $this->balance >= 0 ? 'text-green-600' : 'text-orange-600' }} font-medium mt-1">
                                 {{ $this->balance >= 0 ? '✓ Surplus' : '⚠ Defisit' }}

@@ -17,35 +17,29 @@ class TransactionHistory extends Component
     public $type_transaction;
     public $payment_method;
 
+    /** DEFAULT FILTER */
     public function mount()
     {
+        // otomatis pakai tahun terbaru dari database
         $this->year = Trasction::max(\DB::raw('YEAR(date)'));
         $this->month = null;
     }
 
-    /** reset page saat filter berubah */
+    /** reset pagination jika filter berubah */
     public function updated($property)
     {
         if (in_array($property, [
-            'year', 'month', 'type_transaction', 'payment_method'
+            'year',
+            'month',
+            'type_transaction',
+            'payment_method'
         ])) {
             $this->resetPage();
         }
     }
 
-    public function clearFilter()
-    {
-        $this->reset([
-            'year',
-            'month',
-            'type_transaction',
-            'payment_method'
-        ]);
-        $this->resetPage();
-    }
-
-    /** QUERY UTAMA */
-    public function getTransactionProperty()
+    /** QUERY DASAR (TANPA paginate) */
+    protected function baseQuery()
     {
         return Trasction::query()
             ->when($this->year, fn ($q) =>
@@ -59,13 +53,38 @@ class TransactionHistory extends Component
             )
             ->when($this->payment_method, fn ($q) =>
                 $q->where('payment_method', $this->payment_method)
-            )
+            );
+    }
+
+    /** DATA TABLE (PAGINATION) */
+    public function getTransactionProperty()
+    {
+        return $this->baseQuery()
             ->latest('date')
             ->paginate(5);
     }
 
-    /** RINGKASAN IKUT FILTER */
+    /** TOTAL – HITUNG SEMUA DATA (BUKAN PAGINATION) */
+    public function getTotalIncomeProperty()
+    {
+        return $this->baseQuery()
+            ->where('type_transaction', 'Income')
+            ->sum('amount_money');
+    }
 
+    public function getTotalExpenditureProperty()
+    {
+        return $this->baseQuery()
+            ->where('type_transaction', 'Expenditure')
+            ->sum('amount_money');
+    }
+
+    public function getBalanceProperty()
+    {
+        return $this->totalIncome - $this->totalExpenditure;
+    }
+
+    /** LIST TAHUN OTOMATIS DARI DATABASE */
     public function getYearsProperty()
     {
         return Trasction::selectRaw('YEAR(date) as year')
@@ -74,23 +93,17 @@ class TransactionHistory extends Component
             ->pluck('year');
     }
 
-    public function getTotalIncomeProperty()
+    /** CLEAR FILTER */
+    public function clearFilter()
     {
-        return $this->transaction
-            ->where('type_transaction', 'Income')
-            ->sum('amount_money');
-    }
+        $this->reset([
+            'year',
+            'month',
+            'type_transaction',
+            'payment_method'
+        ]);
 
-    public function getTotalExpenditureProperty()
-    {
-        return $this->transaction
-            ->where('type_transaction', 'Expenditure')
-            ->sum('amount_money');
-    }
-
-    public function getBalanceProperty()
-    {
-        return $this->totalIncome - $this->totalExpenditure;
+        $this->resetPage();
     }
 
     public function render()
