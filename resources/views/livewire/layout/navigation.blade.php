@@ -37,6 +37,10 @@ new class extends Component
                     <x-nav-link :href="route('history')" :active="request()->routeIs('history')" wire:navigate>
                         {{ __('Riwayat Transaksi') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('goal-financial')" :active="request()->routeIs('goal-financial')" wire:navigate>
+                        {{ __('Target Tabungan') }}
+                    </x-nav-link>
                 </div>
             </div>
 
