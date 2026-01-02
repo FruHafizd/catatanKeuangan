@@ -2,18 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Models\Trasction;
+use App\Models\Transaction;
 use Livewire\Component;
 
 class Home extends Component
 {    
     public function render()
     {   
-        $transaction = Trasction::latest()->limit(9)->get();
-
-        return view('livewire.home',[
-           "transactions" => $transaction 
-        ])
+        return view('livewire.home')
             ->layout('layouts.app',[
                 'title' => 'Beranda'
             ]);

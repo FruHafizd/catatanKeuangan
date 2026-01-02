@@ -32,19 +32,22 @@
         <!-- FOOTER -->
         <div class="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
             <button
-                x-on:click="$dispatch('close-modal', 'modal-delete')"
+                x-on:click="
+                $dispatch('close-modal', 'modal-delete');
+                $dispatch('close-delete-modal');
+                "
                 type="button"
                 class="w-full sm:w-auto border-2 border-gray-300 px-4 py-2.5 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 font-medium text-sm text-gray-700">
                 Batal
             </button>
 
             <button
-                wire:click="destroy"
+                wire:click="delete"
                 wire:loading.attr="disabled"
                 type="button"
                 class="w-full sm:w-auto bg-red-600 text-white px-4 py-2.5 sm:py-2 rounded-lg hover:bg-red-700 active:bg-red-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium text-sm shadow-sm hover:shadow-md">
-                <span wire:loading.remove wire:target="destroy">Hapus Catatan</span>
-                <span wire:loading wire:target="destroy" class="flex items-center gap-2">
+                <span wire:loading.remove wire:target="delete">Hapus Catatan</span>
+                <span wire:loading wire:target="delete" class="flex items-center gap-2">
                     <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
