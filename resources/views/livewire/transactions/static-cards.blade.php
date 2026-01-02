@@ -1,8 +1,3 @@
-@php
-    use Carbon\Carbon;
-    Carbon::setLocale('id');
-@endphp
-
 <div class="py-8 flex justify-center">
        <div class="max-w-6xl w-full px-4">
 
@@ -12,7 +7,7 @@
                 Catatan Keuangan
             </h1>
             <p class="text-sm text-gray-500">
-                {{ Carbon::now()->translatedFormat('F Y') }}
+                {{ Carbon\Carbon::now()->translatedFormat('F Y') }}
             </p>
         </div>
 
@@ -25,7 +20,7 @@
                     <div>
                         <p class="text-sm text-green-700 font-medium mb-1">Total Pemasukan</p>
                         <p class="text-2xl font-bold text-green-800">
-                            Rp {{ number_format($incomeMoney ?? 0, 0, ',', '.') }}
+                            Rp {{ number_format($summary['income'] ?? 0, 0, ',', '.') }}
                         </p>
                     </div>
                     <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
@@ -42,7 +37,7 @@
                     <div>
                         <p class="text-sm text-red-700 font-medium mb-1">Total Pengeluaran</p>
                         <p class="text-2xl font-bold text-red-800">
-                            Rp {{ number_format($expenseMoney ?? 0, 0, ',', '.') }}
+                            Rp {{ number_format($summary['expense'] ?? 0, 0, ',', '.') }}
                         </p>
                     </div>
                     <div class="w-12 h-12 bg-red-200 rounded-full flex items-center justify-center">
@@ -59,7 +54,7 @@
                     <div>
                         <p class="text-sm text-blue-700 font-medium mb-1">Saldo Bersih</p>
                         <p class="text-2xl font-bold text-blue-800">
-                            Rp {{ number_format($totalMoney ?? 0, 0, ',', '.') }}
+                            Rp {{ number_format($summary['difference'] ?? 0, 0, ',', '.') }}
                         </p>
                     </div>
                     <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
