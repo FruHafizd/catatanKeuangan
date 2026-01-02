@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trasctions', function (Blueprint $table) {
+        Schema::create('goal_financials', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
-            $table->bigInteger("amount_money");
-            $table->enum("type_transaction",["Income","Expenditure"])->default("Expenditure");
-            $table->enum("payment_method",["Cash","Debit","E-wallet"])->default("Cash");
-            $table->text("information");
+            $table->string('name');
+            $table->decimal('target_amount', 15, 2);
+            $table->string('image');
+            $table->date("start_date");
+            $table->date("end_date");
+            $table->enum('status', ['active', 'completed', 'cancelled'])->default('active');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trasctions');
+        Schema::dropIfExists('goal_financials');
     }
 };
