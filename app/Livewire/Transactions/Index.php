@@ -10,7 +10,7 @@ class Index extends Component
     protected $listeners = [
         'transaction-created' => '$refresh',
         'transaction-deleted' => '$refresh',
-        'transaction-updated' => '$refresh'
+        'transaction-updated' => '$refresh',
     ];
 
     public function render()

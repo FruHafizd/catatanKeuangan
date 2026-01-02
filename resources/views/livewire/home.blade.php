@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     
-        <livewire:layout.home.static-cards />
+    <livewire:transactions.static-cards />
 
     <div class="max-w-6xl mx-auto">
         <div class="max-w-6xl mx-auto flex justify-between items-center mb-4">
