@@ -5,10 +5,10 @@
         <div class="flex justify-between items-start mb-4 sm:mb-6 sticky top-0 bg-white pb-4 border-b">
             <div>
                 <h2 class="text-lg sm:text-xl font-semibold text-gray-900">
-                    Tambah Catatan Keuangan
+                    Tambah Transaksi Berulang
                 </h2>
                 <p class="text-xs sm:text-sm text-gray-500 mt-1">
-                    Isi formulir di bawah untuk menambah catatan
+                    Isi formulir untuk membuat transaksi otomatis berulang
                 </p>
             </div>
 
@@ -25,6 +25,7 @@
         <!-- FORM -->
         <form wire:submit.prevent="save" class="space-y-4">
 
+            <!-- Nama & Tipe -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Name -->
                 <div class="space-y-2">
@@ -32,13 +33,14 @@
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                         </svg>
-                        Nama
+                        Nama Transaksi
+                        <span class="text-red-500">*</span>
                     </label>
                     <input 
+                        type="text"
                         wire:model="name"
-                        rows="3"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
-                        placeholder="Tambahkan Nama"></input>
+                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                        placeholder="Contoh: Gaji Bulanan, Sewa Rumah">
                     @error('name')
                         <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -51,48 +53,21 @@
                 
                 <!-- Type -->
                 <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
-                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                            </svg>
-                            Jenis Transaksi
-                            <span class="text-red-500">*</span>
-                        </label>
-                        <select 
-                            class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white" 
-                            wire:model="type">
-                            <option value="" class="text-gray-400">-- Pilih Jenis --</option>
-                            <option value="income">💰 Pemasukan</option>
-                            <option value="expense">💸 Pengeluaran</option>
-                        </select>
-                        @error('type')
-                            <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                </svg>
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-
-            </div>
-
-        
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Date -->
-                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                         </svg>
-                        Tanggal
+                        Jenis Transaksi
                         <span class="text-red-500">*</span>
                     </label>
-                    <input 
-                        type="date" 
-                        wire:model="date" 
-                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                    @error('date')
+                    <select 
+                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white" 
+                        wire:model="type">
+                        <option value="" class="text-gray-400">-- Pilih Jenis --</option>
+                        <option value="income">💰 Pemasukan</option>
+                        <option value="expense">💸 Pengeluaran</option>
+                    </select>
+                    @error('type')
                         <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -101,7 +76,10 @@
                         </span>
                     @enderror
                 </div>
+            </div>
 
+            <!-- Amount & Frequency -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Amount -->
                 <div 
                     x-data="{
@@ -141,24 +119,25 @@
                     @enderror
                 </div>
 
-                <!-- Metode Pembayaran -->
-                {{-- <div class="space-y-2">
+                <!-- Frequency -->
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
-                        Metode Pembayaran
+                        Frekuensi
                         <span class="text-red-500">*</span>
                     </label>
                     <select 
                         class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white" 
-                        wire:model="payment_method">
-                        <option value="" class="text-gray-400">-- Pilih Metode --</option>
-                        <option value="Cash">💵 Tunai</option>
-                        <option value="Debit">💳 Debit</option>
-                        <option value="E-wallet">📱 E-Wallet</option>
+                        wire:model="frequency">
+                        <option value="" class="text-gray-400">-- Pilih Frekuensi --</option>
+                        <option value="daily">📅 Harian</option>
+                        <option value="weekly">📆 Mingguan</option>
+                        <option value="monthly">🗓️ Bulanan</option>
+                        <option value="yearly">📋 Tahunan</option>
                     </select>
-                    @error('payment_method')
+                    @error('frequency')
                         <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -166,8 +145,73 @@
                             {{ $message }}
                         </span>
                     @enderror
-                </div> --}}
+                </div>
+            </div>
 
+            <!-- Start Date & End Date -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Start Date -->
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Tanggal Mulai
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="date" 
+                        wire:model="start_date" 
+                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                    @error('start_date')
+                        <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <!-- End Date -->
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Tanggal Selesai
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="date" 
+                        wire:model="end_date" 
+                        class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                    @error('end_date')
+                        <span class="text-xs text-red-600 flex items-center gap-1 mt-1">
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex gap-3">
+                    <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div class="text-sm text-blue-800">
+                        <p class="font-medium mb-1">Informasi Transaksi Berulang</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>Transaksi akan dibuat otomatis sesuai frekuensi yang dipilih</li>
+                            <li>Anda dapat menonaktifkan atau mengedit kapan saja</li>
+                            <li>Pastikan tanggal selesai lebih besar dari tanggal mulai</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- FOOTER -->
@@ -182,12 +226,12 @@
                 <button 
                     type="submit"
                     wire:loading.attr="disabled"
-                    class="w-full sm:w-auto bg-blue-600 text-white px-4 py-2.5 sm:py-2 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-medium text-sm shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                    class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2.5 sm:py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 transition-all duration-200 font-medium text-sm shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                     <span wire:loading.remove wire:target="save">
                         <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        Simpan Catatan
+                        Simpan Transaksi
                     </span>
                     <span wire:loading wire:target="save" class="flex items-center gap-2">
                         <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -38,6 +38,10 @@ new class extends Component
                         {{ __('Riwayat Transaksi') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('recurring-transactions')" :active="request()->routeIs('recurring-transactions')" wire:navigate>
+                        {{ __('Transaksi Berulang') }}
+                    </x-nav-link>
+                    
                     <x-nav-link :href="route('goal-financial')" :active="request()->routeIs('goal-financial')" wire:navigate>
                         {{ __('Target Tabungan') }}
                     </x-nav-link>

@@ -89,6 +89,6 @@ class Index extends Component
             'summary' => $this->summary
         ])->layout('layouts.app', [
                 'title' => 'Riwayat Transaksi'
-            ]);;
+            ]);
     }
 }
