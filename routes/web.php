@@ -12,7 +12,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', Home::class)->name('home');
     Route::get('/history', Index::class)->name('history');
     Route::get('/recurring-transactions', RecurringIndex::class)->name('recurring-transactions');
-    Route::get('/goal-financial', GoalFinancial::class)->name('goal-financial');
 });
 
 Route::view('profile', 'profile')

@@ -42,9 +42,6 @@ new class extends Component
                         {{ __('Transaksi Berulang') }}
                     </x-nav-link>
                     
-                    <x-nav-link :href="route('goal-financial')" :active="request()->routeIs('goal-financial')" wire:navigate>
-                        {{ __('Target Tabungan') }}
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -95,6 +92,12 @@ new class extends Component
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                 {{ __('Beranda') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('history')" :active="request()->routeIs('history')" wire:navigate>
+                {{ __('Riwayat Transaksi') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('recurring-transactions')" :active="request()->routeIs('recurring-transactions')" wire:navigate>
+                {{ __('Transaksi Berulang') }}
             </x-responsive-nav-link>
         </div>
 
