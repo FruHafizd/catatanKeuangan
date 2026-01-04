@@ -7,40 +7,80 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use function Symfony\Component\Clock\now;
+
 class Index extends Component
 {   
     use WithPagination;
     protected $paginationTheme = 'tailwind';
+    public $filterYear;
+    public $filterMonth;
+    public $filterType = '';
+
+    public function mount() {
+        $this->filterYear = date('Y');
+        $this->filterMonth = date('n'); 
+    }
+
+    public function updatingFilterYear(){
+        $this->resetPage();
+    }
+
+    public function updatingFilterMonth(){
+        $this->resetPage();
+    }
+
+    public function updatingFilterType(){
+        $this->resetPage();
+    }
+
+    public function resetFilters(){
+        $this->filterYear = '';
+        $this->filterMonth = '';
+        $this->filterType = '';
+        $this->resetPage();
+    }
 
     public function getTransactionsProperty(){
-        return Transaction::where('user_id', auth()->id())->paginate(10);
+        $query = Transaction::where('user_id', auth()->id());
+
+        if ($this->filterYear) {
+            $query->whereYear('date', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('date', $this->filterMonth);
+        }
+
+        if ($this->filterType) {
+            $query->where('type', $this->filterType);
+        }
+
+        return $query->orderBy('date', 'desc')->paginate(10);
     }
 
     public function getSummaryProperty()  
-    {
-        $now = Carbon::now();
+    {   
+        $query = Transaction::where('user_id', auth()->id());
         
-        $transactions = Transaction::where('user_id', auth()->id())
-                                    ->whereMonth('date', $now->month)
-                                    ->whereYear('date', $now->year)
-                                    ->select('type', 'amount')
-                                    ->get();
+        if ($this->filterYear) {
+            $query->whereYear('date', $this->filterYear);
+        }
+        if ($this->filterMonth) {
+            $query->whereMonth('date', $this->filterMonth);
+        }
+
+        $transactions = $query->select('type', 'amount')->get();
         
-        $income = $transactions
-                    ->where('type','income')
-                    ->sum('amount');
-        
-        $expense = $transactions
-                    ->where('type', 'expense')
-                    ->sum('amount');
+        $income = $transactions->where('type', 'income')->sum('amount');
+        $expense = $transactions->where('type', 'expense')->sum('amount');
 
         return [
-          'income' => $income,
-          'expense' => $expense,
-          'difference' => $income - $expense  
+            'income' => $income,
+            'expense' => $expense,
+            'difference' => $income - $expense
         ];
     }
-
 
     public function render()
     {
