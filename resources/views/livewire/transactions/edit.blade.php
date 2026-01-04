@@ -174,7 +174,7 @@
             <!-- FOOTER -->
             <div class="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-4 border-t mt-6">
                 <button
-                    x-on:click="$dispatch('close-modal', 'modal-create')"
+                    x-on:click="$dispatch('close-modal', 'modal-edit')"
                     type="button"
                     class="w-full sm:w-auto border-2 border-gray-300 px-4 py-2.5 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 font-medium text-sm text-gray-700">
                     Batal
