@@ -12,7 +12,7 @@
                         {{ $item->date->format('d M Y') }}
                     </p>
                     <p class="font-semibold text-gray-800">
-                        {{ $item['description'] }}
+                        {{ $item['name'] }}
                     </p>
                 </div>
 
@@ -31,10 +31,6 @@
                 Rp {{ number_format($item['amount'], 0, ',', '.') }}
             </p>
 
-            <!-- FOOTER INFO -->
-            <p class="text-sm text-gray-500 mt-2">
-                {{ $item->payment_method ?? '-' }}
-            </p>
 
             <!-- ACTION -->
             <div class="mt-4 flex justify-end gap-3">

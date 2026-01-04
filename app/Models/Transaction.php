@@ -14,14 +14,20 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
         'amount',
         'type',
         'date',
-        'description',
+        'recurring_transactions_id'
     ];
 
     public function user()  {
         return $this->belongsTo(User::class);
+    }
+
+    public function recurring()
+    {
+        return $this->belongsTo(RecurringTransaction::class);
     }
 
 }

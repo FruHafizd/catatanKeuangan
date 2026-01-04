@@ -10,13 +10,13 @@ class Create extends Component
     public $amount; 
     public $type;
     public $date;
-    public $description;
+    public $name;
 
     protected $rules = [
+        'name' => 'required|string|min:3',
         'amount' => 'required|numeric|min:1',
         'type' => 'required|in:income,expense',
         'date' => 'required|date',
-        'description' => 'required|string|min:3'
     ];
 
     protected $messages = [
@@ -24,10 +24,10 @@ class Create extends Component
         'amount.numeric' => 'Jumlah harus berupa angka',
         'type.required' => 'Type tidak boleh kosong',
         'date.required' => 'Tanggal tidak boleh kosong',
-        'description.required' => 'Deskripsi tidak boleh kosong',
+        'name.required' => 'Nama tidak boleh kosong',
         'type.in' => 'Type tidak valid',
         'date.date' => 'Format tanggal tidak valid',
-        'description.min' => 'Deskripsi minimal 3 karakter',
+        'name.min' => 'Nama minimal 3 karakter',
     ];
 
     public function save()  {
@@ -39,7 +39,7 @@ class Create extends Component
             'amount' => $this->amount,
             'type' => $this->type,
             'date' => $this->date,
-            'description' => $this->description
+            'name' => $this->name
         ]);
         $this->reset();
         $this->dispatch('close-modal', 'modal-create');

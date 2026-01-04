@@ -11,7 +11,7 @@ class Edit extends Component
     public $amount;
     public $type;
     public $date;
-    public $description;
+    public $name;
 
     protected $listeners = [
         'edit-transaction' => 'loadTransaction',
@@ -22,7 +22,7 @@ class Edit extends Component
         'amount' => 'required|numeric|min:1',
         'type' => 'required|in:income,expense',
         'date' => 'required|date',
-        'description' => 'required|string|min:3'
+        'name' => 'required|string|min:3'
     ];
 
     protected $messages = [
@@ -30,10 +30,10 @@ class Edit extends Component
         'amount.numeric' => 'Jumlah harus berupa angka',
         'type.required' => 'Type tidak boleh kosong',
         'date.required' => 'Tanggal tidak boleh kosong',
-        'description.required' => 'Deskripsi tidak boleh kosong',
+        'name.required' => 'Nama tidak boleh kosong',
         'type.in' => 'Type tidak valid',
         'date.date' => 'Format tanggal tidak valid',
-        'description.min' => 'Deskripsi minimal 3 karakter',
+        'name.min' => 'Nama minimal 3 karakter',
     ];
 
     public function loadTransaction($id)  {
@@ -45,7 +45,7 @@ class Edit extends Component
         $this->amount = $transaction->amount;
         $this->type = $transaction->type;   
         $this->date = $transaction->date->format('Y-m-d');
-        $this->description = $transaction->description;
+        $this->name = $transaction->name;
     }
 
     public function resetForm()  {
@@ -54,7 +54,7 @@ class Edit extends Component
             'amount',
             'type',
             'date',
-            'description'
+            'name'
         ]);
     }
 
@@ -71,7 +71,7 @@ class Edit extends Component
                         'amount' => $this->amount,
                         'type' => $this->type,
                         'date' => $this->date,
-                        'description' => $this->description
+                        'name' => $this->name
                     ]);
         $this->resetForm();
         $this->dispatch('transaction-updated');
