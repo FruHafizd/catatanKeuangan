@@ -8,4 +8,4 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('recurring:generate')->daily();
+Schedule::command('recurring:generate')->everyMinute();
