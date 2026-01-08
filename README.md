@@ -10,7 +10,7 @@ Dashboard utama menampilkan ringkasan keuangan Anda untuk bulan berjalan (contoh
 - **Total Pengeluaran** - Jumlah seluruh pengeluaran bulan ini
 - **Saldo Bersih** - Selisih antara pemasukan dan pengeluaran
 
-![Dashboard Summary](<img width="1464" height="600" alt="image" src="https://github.com/user-attachments/assets/ee9c3393-184a-4ddd-8dce-505cb416905d" />)
+![Dashboard Summary](https://github.com/user-attachments/assets/ee9c3393-184a-4ddd-8dce-505cb416905d)
 
 ### 📝 Riwayat Transaksi
 Catat dan pantau semua transaksi keuangan Anda dengan fitur:
@@ -20,7 +20,7 @@ Catat dan pantau semua transaksi keuangan Anda dengan fitur:
 - Filter berdasarkan **Tipe Transaksi** (Pemasukan/Pengeluaran)
 - Riwayat lengkap semua transaksi Anda
 
-![Riwayat Transaksi](<img width="1431" height="682" alt="image" src="https://github.com/user-attachments/assets/a5e9f10d-f9f3-44ff-b8c9-bb0363a7f156" />)
+![Riwayat Transaksi](https://github.com/user-attachments/assets/a5e9f10d-f9f3-44ff-b8c9-bb0363a7f156)
 
 ### 🔄 Transaksi Berulang (Recurring)
 Atur transaksi yang terjadi secara berulang otomatis:
@@ -29,7 +29,7 @@ Atur transaksi yang terjadi secara berulang otomatis:
 - Cicilan atau pembayaran berkala
 - Kustomisasi frekuensi pengulangan
 
-![Transaksi Berulang](<img width="1491" height="449" alt="image" src="https://github.com/user-attachments/assets/8d87d692-953b-459b-bc5e-626da767ce68" />)
+![Transaksi Berulang](https://github.com/user-attachments/assets/8d87d692-953b-459b-bc5e-626da767ce68)
 
 ## 🚀 Instalasi
 
