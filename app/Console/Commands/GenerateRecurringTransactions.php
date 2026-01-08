@@ -7,51 +7,56 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class GenerateRecurringTransactions extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'recurring:generate';
+    protected $description = 'Generate transactions from recurring rules';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Generate transactions from reccuring rules';
-
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
+        Log::info('Recurring command START', [
+            'time' => now()->toDateTimeString(),
+        ]);
+
         $today = Carbon::today();
 
-        $recurrings = RecurringTransaction::query()->where('is_active', true)->whereDate('start_date', '<=', $today)->where(function ($q) use ($today)
-        {
-            $q->whereNull('end_date')->orWhereDate('end_date', '>=', $today);    
-        })->get();
+        $recurrings = RecurringTransaction::query()
+            ->where('is_active', true)
+            ->whereDate('start_date', '<=', $today)
+            ->where(function ($q) use ($today) {
+                $q->whereNull('end_date')
+                  ->orWhereDate('end_date', '>=', $today);    
+            })
+            ->get();
 
         foreach ($recurrings as $recurring) {
+            // ✅ Cek apakah sudah generate hari ini
+            if ($recurring->last_generated_at && $recurring->last_generated_at->isSameDay($today)) {
+                Log::info('Skipping - already generated today', [
+                    'recurring_id' => $recurring->id,
+                    'last_generated' => $recurring->last_generated_at->toDateString(),
+                ]);
+                continue;
+            }
+
             if (!$this->shouldGenerate($recurring, $today)) {
                 continue;
             }
 
             DB::transaction(function () use ($recurring, $today) {
-
-                $exists = Transaction::where('recurring_transaction_id', $recurring->id)->whereDate('date', $today)->exists();
+                // Double check untuk keamanan
+                $exists = Transaction::where('recurring_transaction_id', $recurring->id)
+                    ->whereDate('date', $today)
+                    ->exists();
 
                 if ($exists) {
+                    Log::info('Transaction already exists', [
+                        'recurring_id' => $recurring->id,
+                    ]);
                     return;
                 }
-
-                $recurring->update([
-                    'last_generated_at' => $today,
-                ]);
 
                 Transaction::create([
                     'user_id' => $recurring->user_id,
@@ -61,14 +66,23 @@ class GenerateRecurringTransactions extends Command
                     'date' => $today,
                     'recurring_transaction_id' => $recurring->id,
                 ]);
+
+                $recurring->update([
+                    'last_generated_at' => $today,
+                ]);
+
+                Log::info('Recurring transaction generated', [
+                    'recurring_id' => $recurring->id,
+                    'date' => $today->toDateString(),
+                ]);
             });
         }
 
         return self::SUCCESS;
     }
 
-
-    private function shouldGenerate($recurring, Carbon $today) {
+    private function shouldGenerate($recurring, Carbon $today) 
+    {
         return match ($recurring->frequency) {
             'daily'   => true,
             'weekly'  => $recurring->start_date->dayOfWeek === $today->dayOfWeek,

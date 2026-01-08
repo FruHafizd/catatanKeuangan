@@ -1,4 +1,4 @@
-<x-modal name="modal-edit" focusable>
+<x-modal name="modal-edit-recurring-transaction" focusable>
     <div class="p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
 
         <!-- HEADER -->
@@ -13,7 +13,7 @@
             </div>
 
             <button
-                x-on:click="$dispatch('close-modal', 'modal-edit')"
+                x-on:click="$dispatch('close-modal', 'modal-edit-recurring-transaction')"
                 type="button"
                 class="flex-shrink-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg p-1.5 transition-colors duration-200 ml-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -246,7 +246,7 @@
             <!-- FOOTER -->
             <div class="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-4 border-t mt-6">
                 <button
-                    x-on:click="$dispatch('close-modal', 'modal-edit')"
+                    x-on:click="$dispatch('close-modal', 'modal-edit-recurring-transaction')"
                     type="button"
                     class="w-full sm:w-auto border-2 border-gray-300 px-4 py-2.5 sm:py-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 font-medium text-sm text-gray-700">
                     Batal
