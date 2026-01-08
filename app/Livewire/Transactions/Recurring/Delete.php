@@ -43,7 +43,7 @@ class Delete extends Component
     private function close(): void
     {
         $this->reset('recurringTransactionId');
-        $this->dispatch('close-modal', 'modal-delete');
+        $this->dispatch('close-modal', 'modal-delete-recurring-transaction');
     }
 
     public function render()

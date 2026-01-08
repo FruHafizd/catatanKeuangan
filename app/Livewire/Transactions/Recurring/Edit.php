@@ -96,7 +96,7 @@ class Edit extends Component
 
         $this->resetForm();
         $this->dispatch('recurring-transaction-updated');
-        $this->dispatch('close-modal','modal-edit');
+        $this->dispatch('close-modal','modal-edit-recurring-transaction');
     }
 
     public function render()

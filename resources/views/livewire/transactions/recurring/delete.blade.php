@@ -1,4 +1,4 @@
-<x-modal name="modal-delete" focusable>
+<x-modal name="modal-delete-recurring-transaction" focusable>
     <div class="p-4 sm:p-6">
 
         <!-- HEADER -->
@@ -40,7 +40,7 @@
         <div class="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
             <button
                 x-on:click="
-                $dispatch('close-modal', 'modal-delete');
+                $dispatch('close-modal', 'modal-delete-recurring-transaction');
                 $dispatch('close-delete-modal');
                 "
                 type="button"
