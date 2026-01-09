@@ -86,6 +86,13 @@
                         display: '',
                         raw: ''
                     }"
+                    @open-modal.window="
+                        if ($event.detail === 'modal-create') {
+                            display = '';
+                            raw = '';
+                            $wire.set('amount', '');
+                        }
+                    "
                     class="space-y-2"
                 >
                     <label class="text-sm font-medium text-gray-700 flex items-center gap-1">
