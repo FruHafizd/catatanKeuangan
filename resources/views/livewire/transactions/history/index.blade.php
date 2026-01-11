@@ -149,7 +149,7 @@
                                     Tanggal
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Deskripsi
+                                    Nama
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Type
@@ -169,7 +169,7 @@
                                        {{ $item->date->format('d M Y') }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-900">
-                                        {{ $item['description'] }}
+                                        {{ $item['name'] }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $item['type'] === 'income' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'  }}">
