@@ -13,7 +13,8 @@ class DebtPlan extends Model
         'tenor_unit',
         'tenor_value',
         'income_type',
-        'income_value'
+        'income_value',
+        'monthly_expense',
     ];
 
     public function user(){

@@ -28,7 +28,7 @@
     </div>
     <livewire:debt-plans.modal.create />
 
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-md" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 8000)">
             <div class="flex items-start gap-3">
                 <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,5 +94,5 @@
                 </button>
             </div>
         </div>
-    @endif
+    @endif --}}
 </div>

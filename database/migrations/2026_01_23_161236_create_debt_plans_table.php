@@ -18,8 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('total_loan');
             $table->enum('tenor_unit',['year','month'])->default('month');
             $table->integer('tenor_value');
-            $table->enum('income_type',['daily','weekly','yearly']);
+            $table->enum('income_type',['daily','weekly','monthly']);
             $table->unsignedBigInteger('income_value');
+            $table->unsignedBigInteger('monthly_expense');
             $table->timestamps();
         });
     }
