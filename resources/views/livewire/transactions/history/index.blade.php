@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-6 sm:py-12">
-        
+
         <!-- Summary Cards -->
         <div class="py-4 sm:py-8 flex justify-center px-4">
             <div class="max-w-6xl w-full">
@@ -70,7 +70,7 @@
         <!-- Table Section -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                
+
                 <!-- FILTER SECTION -->
                 <div class="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 px-4 sm:px-6 py-4 sm:py-5">
                     <div class="flex flex-col space-y-3">
@@ -82,6 +82,14 @@
                                 </svg>
                                 Filter Transaksi
                             </h3>
+                            <div class="flex items-end">
+                                <button
+                                x-data
+                                x-on:click.prevent="$dispatch('open-modal', 'modal-create')"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
+                                    + Tambah Catatan
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Filter Controls -->
@@ -182,7 +190,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                         <div class="flex items-center justify-center gap-2">
-                                            <button 
+                                            <button
                                             x-data
                                             x-on:click.prevent="
                                                             $dispatch('edit-transaction', { id: {{ $item->id }} });
@@ -194,7 +202,7 @@
                                                 </svg>
                                                 Edit
                                             </button>
-                                            <button 
+                                            <button
                                             x-data
                                             x-on:click.prevent="
                                                             $dispatch('confirm-delete', { id: {{ $item->id }} });
@@ -239,14 +247,14 @@
                                     {{ $item['type'] === 'income' ? 'Pemasukan' : 'Pengeluaran' }}
                                 </span>
                             </div>
-                            
+
                             <div class="flex items-center justify-between">
                                 <div class="text-base font-bold {{ $item['type'] === 'income' ? 'text-green-600' : 'text-red-600' }}">
                                     {{ $item['type'] === 'income' ? '+' : '-' }}
                                     Rp {{ number_format($item['amount'], 0, ',', '.') }}
                                 </div>
                                 <div class="flex gap-2">
-                                    <button 
+                                    <button
                                     x-data
                                     x-on:click.prevent="
                                                     $dispatch('edit-transaction', { id: {{ $item->id }} });
@@ -257,7 +265,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                     </button>
-                                    <button 
+                                    <button
                                     x-data
                                     x-on:click.prevent="
                                                     $dispatch('confirm-delete', { id: {{ $item->id }} });
@@ -290,21 +298,21 @@
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
                         <!-- Showing Info -->
                         <div class="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
-                            Menampilkan 
-                            <span class="font-medium">{{ $transactions->firstItem() }}</span> sampai 
-                            <span class="font-medium">{{ $transactions->lastItem() }}</span> dari 
+                            Menampilkan
+                            <span class="font-medium">{{ $transactions->firstItem() }}</span> sampai
+                            <span class="font-medium">{{ $transactions->lastItem() }}</span> dari
                             <span class="font-medium">{{ $transactions->total() }}</span> transaksi
                         </div>
 
                         <!-- Pagination Buttons -->
                         <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                             <!-- Previous Button -->
-                            <button 
+                            <button
                             wire:click='previousPage'
                             wire:loading.attr='disabled'
                             @if ($transactions->onFirstPage()) disabled @endif
                             class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 text-sm font-medium
-                            {{ $transactions->onFirstPage() 
+                            {{ $transactions->onFirstPage()
                             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                             : 'bg-white text-gray-500 hover:bg-gray-50'}}">
                                 <span class="sr-only">Previous</span>
@@ -316,7 +324,7 @@
                             <!-- Page Numbers - Responsive -->
                             <div class="hidden sm:flex">
                                 @foreach ($transactions->getUrlRange(1, $transactions->lastPage()) as $page => $url)
-                                    <button 
+                                    <button
                                     wire:click='gotoPage({{ $page }})'
                                     class="relative inline-flex items-center px-4 py-2 border text-sm font-medium
                                     {{ $page === $transactions->currentPage()
@@ -331,14 +339,14 @@
                             <div class="sm:hidden relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
                                 {{ $transactions->currentPage() }} / {{ $transactions->lastPage() }}
                             </div>
-                        
+
                             <!-- Next Button -->
-                            <button 
+                            <button
                             wire:click='nextPage'
                             wire:loading.attr='disabled'
                             @if (!$transactions->hasMorePages()) disabled @endif
                             class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 text-sm font-medium
-                            {{!$transactions->hasMorePages() 
+                            {{!$transactions->hasMorePages()
                             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                             : 'bg-white text-gray-500 hover:bg-gray-50'}}">
                                 <span class="sr-only">Next</span>
@@ -353,6 +361,7 @@
             </div>
         </div>
 
+        <livewire:transactions.create />
         <livewire:transactions.edit />
         <livewire:transactions.delete />
 

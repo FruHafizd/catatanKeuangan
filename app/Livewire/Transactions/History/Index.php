@@ -10,7 +10,13 @@ use Livewire\WithPagination;
 use function Symfony\Component\Clock\now;
 
 class Index extends Component
-{   
+{
+    protected $listeners = [
+        'transaction-created' => '$refresh',
+        'transaction-deleted' => '$refresh',
+        'transaction-updated' => '$refresh',
+    ];
+
     use WithPagination;
     protected $paginationTheme = 'tailwind';
     public $filterYear;
@@ -19,7 +25,7 @@ class Index extends Component
 
     public function mount() {
         $this->filterYear = date('Y');
-        $this->filterMonth = date('n'); 
+        $this->filterMonth = date('n');
     }
 
     public function updatingFilterYear(){
@@ -59,10 +65,10 @@ class Index extends Component
         return $query->orderBy('date', 'desc')->paginate(10);
     }
 
-    public function getSummaryProperty()  
-    {   
+    public function getSummaryProperty()
+    {
         $query = Transaction::where('user_id', auth()->id());
-        
+
         if ($this->filterYear) {
             $query->whereYear('date', $this->filterYear);
         }
@@ -71,7 +77,7 @@ class Index extends Component
         }
 
         $transactions = $query->select('type', 'amount')->get();
-        
+
         $income = $transactions->where('type', 'income')->sum('amount');
         $expense = $transactions->where('type', 'expense')->sum('amount');
 
